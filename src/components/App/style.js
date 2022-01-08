@@ -1,7 +1,10 @@
-import styled, { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
         * {
+                ul, li, button, input, a{
+                        all: unset;
+                }
                 margin: 0;
                 padding: 0;
                 border: 0;
@@ -12,13 +15,10 @@ const GlobalStyle = createGlobalStyle`
                 box-sizing: border-box;
                 -ms-overflow-style: none;   
                 scrollbar-width: none;      
-                        &::-webkit-scrollbar {
+                        ::-webkit-scrollbar {
                                 display: none;      
                         }
-                        & ul, li, button, input, a{
-                                all: unset;
         }
-          }
 `
 
 export { GlobalStyle };
