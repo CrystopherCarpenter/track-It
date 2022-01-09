@@ -19,12 +19,12 @@ const Input = styled.input`
         width: 303px;
         height: 45px;
         box-sizing: border-box;
-        background: #FFFFFF;
+        background: ${props => (props.disabled ? `#F2F2F2` : `#FFFFFF`)};
         border: 1px solid #D5D5D5;
         border-radius: 5px;
         padding: 0 11px;
         font-size: 20px;
-        color: #666666;
+        color: ${props => (props.disabled ? `#AFAFAF` : `#666666`)};
         ::placeholder{
                 color: #DBDBDB; 
         }
@@ -40,12 +40,13 @@ const Button = styled.button`
         border-radius: 4.63636px;
         font-size: 21px;
         color: #FFFFFF;
+        ${props => (props.disabled && `opacity: 0.7;`)}
         :hover{
                 cursor: pointer;
         }
 `
 
-const Link = styled.p`
+const PageLink = styled.p`
         font-size: 14px;
         text-align: center;
         text-decoration-line: underline;
@@ -55,4 +56,4 @@ const Link = styled.p`
         }
 `
 
-export { Logo, Container, Input, Button, Link };
+export { Logo, Container, Input, Button, PageLink };
