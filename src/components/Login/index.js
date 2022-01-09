@@ -25,8 +25,8 @@ function Login() {
                                 <Button disabled={loading} onClick={() => {
                                         setLoading(true);
                                         const promise = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login`, {
-                                                email: { email },
-                                                password: { password }
+                                                email: `${email}`,
+                                                password: `${password}`
                                         });
                                         promise.then((answer) => {
                                                 setToken(answer.data.token);
