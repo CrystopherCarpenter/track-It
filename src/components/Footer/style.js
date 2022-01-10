@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 const FooterNavBar = styled.div`
+        position: relative;
         position: fixed;
         bottom: 0px;
         width: 100vw;
@@ -13,7 +14,7 @@ const FooterNavBar = styled.div`
         padding: 0 33px;
 `
 
-const FooterButton = styled.span`
+const FooterLink = styled.span`
         font-size: 18px;
         text-align: center;
         color: #52B6FF;
@@ -22,4 +23,15 @@ const FooterButton = styled.span`
         }
 `
 
-export { FooterNavBar, FooterButton }
+const Progressbar = styled.div`
+        width: 91px;
+        height: 91px;
+        position: absolute;
+        top: -31px;
+        left: calc((100vw - 91px)/2);
+        :hover{
+                cursor: pointer;
+        }
+`
+
+export { FooterNavBar, FooterLink, Progressbar }

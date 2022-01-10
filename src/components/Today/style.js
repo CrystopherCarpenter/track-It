@@ -27,7 +27,7 @@ const Text = styled.p`
 `
 
 const HabitName = styled.h1`
-        max-width: 100%;
+        max-width: 100%;0
         margin: 8px;
         font-size: 20px;
         line-height: 25px;
@@ -55,9 +55,15 @@ const Habit = styled.div`
                         line-height: 16px;
                         color: #666666;
                 }
-                div p span{
-                        color: ${props => (!props.done ? `#666666` : `#8FC549`)};
-                }
+                
+`
+
+const Current = styled.span`
+        color: ${props => (!props.done ? `#666666` : `#8FC549`)};
+`
+
+const Highest = styled.span`
+        color: ${props => (!props.currentIsHighest ? `#666666` : `#8FC549`)};
 `
 
 const CheckBox = styled.div`
@@ -80,4 +86,4 @@ const CheckBox = styled.div`
                 }
 `
 
-export { Main, Container, Title, Text, HabitName, Habit, CheckBox };
+export { Main, Container, Title, Text, HabitName, Habit, Current, Highest, CheckBox };

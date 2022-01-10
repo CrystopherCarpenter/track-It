@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Check from "../../assets/Check.png"
-import { Main, Container, Title, Text, HabitName, Habit, CheckBox } from "./style"
+import { Main, Container, Title, Text, HabitName, Habit, CheckBox, Current, Highest } from "./style"
 import { useContext } from "react";
 import UserContext from "../../Context/UserContext";
 import dayjs from 'dayjs'
@@ -10,7 +10,7 @@ import axios from "axios";
 function Today() {
         const today = dayjs();
         const { token } = useContext(UserContext);
-        const [todayHabits, setTodayHabits] = useState(null);
+        const [todayHabits, setTodayHabits] = useState([]);
 
         useEffect(() => {
                 const promise = axios.get(
@@ -26,7 +26,7 @@ function Today() {
         function setDate(today) {
                 return (`
                         ${locale_br.weekdays[today.getDay()]}, 
-                        ${today.getDate() < 10 && `0`}${today.getDate()}/${today.getMonth() < 9 && `0`}${(today.getMonth()) + 1}`
+                        ${today.getDate() < 10 ? `0` : ``}${today.getDate()}/${today.getMonth() < 9 ? `0` : ``}${(today.getMonth()) + 1}`
                 );
         }
 
@@ -39,11 +39,11 @@ function Today() {
                         {todayHabits.length === 0 ? (
                                 <Text>Você não tem nenhum hábito hoje</Text>
                         ) : todayHabits.map((habit) => (
-                                <Habit key={habit.id} done={habit.done}>
+                                <Habit key={habit.id}>
                                         <div>
                                                 <HabitName>{habit.name}</HabitName>
-                                                <p>Sequência atual: <span>{habit.currentSequence} dias</span></p>
-                                                <p>Seu recorde: <span>{habit.highestSequence} dias</span></p>
+                                                <p>Sequência atual: <Current done={habit.done}>{habit.currentSequence} dias</Current></p>
+                                                <p>Seu recorde: <Highest currentIsHighest={habit.currentSequence === habit.highestSequence}>{habit.highestSequence} dias</Highest></p>
                                         </div>
                                         <CheckBox done={habit.done}><img src={Check} alt="Concluído" /></CheckBox>
                                 </Habit>
@@ -53,3 +53,4 @@ function Today() {
 }
 
 export default Today;
+

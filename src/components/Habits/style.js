@@ -52,13 +52,13 @@ const HabitInput = styled.input`
         width: 100%;
         height: 45px;
         box-sizing: border-box;
-        background: #FFFFFF;
+        ${props => (props.disabled ? `#F2F2F2` : `#FFFFFF`)};
         border: 1px solid #D5D5D5;
         border-radius: 5px;
         margin-bottom: 8px;
         padding: 0 11px;
         font-size: 20px;
-        color: #666666;
+        color: ${props => (props.disabled ? `#AFAFAF` : `#666666`)};
         ::placeholder{
                 color: #DBDBDB; 
         }
@@ -71,7 +71,7 @@ const Weekdays = styled.div`
         column-gap: 4px;
 `
 
-const Day = styled.div`
+const Day = styled.button`
         width: 30px;
         height: 30px;
         background: ${props => (props.selected ? `#CFCFCF` : `#FFFFFF`)};
@@ -99,8 +99,11 @@ const Button = styled.button`
         font-size: 16px;
         color: ${props => (props.type === "save" ? `#FFFFFF` : `#52B6FF`)};
         text-align: center;
-        padding-bottom: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         margin-left: 25px;
+        ${props => (props.disabled && `opacity: 0.7;`)}
         :hover{
                 cursor: pointer;
         }
