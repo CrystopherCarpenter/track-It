@@ -21,6 +21,7 @@ function Footer() {
                                                 value={progress}
                                                 text={`Hoje`}
                                                 background
+                                                backgroundPadding={6}
                                                 styles={buildStyles({
                                                         backgroundColor: "#52B6FF",
                                                         textColor: "#fff",

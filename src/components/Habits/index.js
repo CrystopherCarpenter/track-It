@@ -10,8 +10,8 @@ import axios from "axios";
 function Habits() {
         const days = [{ name: `D`, id: 0 }, { name: `S`, id: 1 }, { name: `T`, id: 2 }, { name: `Q`, id: 3 }, { name: `Q`, id: 4 }, { name: `S`, id: 5 }, { name: `S`, id: 6 }];
         const [add, setAdd] = useState(false);
-        const [selectedDays, setSelectedDays] = useState([]);
-        const [habits, setHabits] = useState([]);
+        const [selectedDays, setSelectedDays] = useState();
+        const [habits, setHabits] = useState();
         const [loading, setLoading] = useState(false);
         const [habitName, setHabitName] = useState(``);
         const { token } = useContext(UserContext);
@@ -31,8 +31,6 @@ function Habits() {
                 });
         }
 
-        console.log(habits);
-
         function selectDay(id) {
                 if (selectedDays.includes(id)) {
                         setSelectedDays(selectedDays.filter(day => day !== id));
@@ -49,7 +47,6 @@ function Habits() {
                         {add && (<NewHabit>
                                 <HabitInput type="text" placeholder='nome do hábito' disabled={loading}
                                         onChange={e => {
-                                                { console.log(habitName, selectedDays); }
                                                 setHabitName(e.target.value)
                                         }}
                                         value={habitName}></HabitInput>
@@ -75,7 +72,6 @@ function Habits() {
                                                         },
                                                         { headers: { Authorization: `Bearer ${token}` } });
                                                 promise.then((answer) => {
-                                                        console.log(answer);
                                                         setHabitName(``);
                                                         setSelectedDays([]);
                                                         setLoading(false);
