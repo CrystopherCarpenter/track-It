@@ -56,7 +56,7 @@ const Habit = styled.div`
                         color: #666666;
                 }
                 div p span{
-                        color: #666666; /*#8FC549;*/
+                        color: ${props => (!props.done ? `#666666` : `#8FC549`)};
                 }
 `
 
@@ -67,7 +67,7 @@ const CheckBox = styled.div`
         justify-content: center;
         align-items: center;
         margin-left: 15px;
-        background-color: #EBEBEB; /*#8FC549;*/
+        background-color: ${props => (!props.done ? `#EBEBEB` : `#8FC549`)};
         border: 1px solid #E7E7E7;
         border-radius: 5px;     
                 img{

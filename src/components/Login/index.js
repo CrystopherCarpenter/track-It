@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { Link } from "react-router-dom";
 import { useNavigate } from 'react-router';
 import { useContext } from "react";
-import TokenContext from "../../Context/TokenContext";
+import UserContext from "../../Context/UserContext";
 import { Container, Input, Button, PageLink } from "./style"
 import Loader from "react-loader-spinner"
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import axios from "axios";
 
 function Login() {
-        const { setToken } = useContext(TokenContext);
+        const { setUser } = useContext(UserContext);
+        const { setToken } = useContext(UserContext);
         const [loading, setLoading] = useState(false);
         const [email, setEmail] = useState(``);
         const [password, setPassword] = useState(``);
@@ -29,6 +30,7 @@ function Login() {
                                                 password: `${password}`
                                         });
                                         promise.then((answer) => {
+                                                setUser(answer.data);
                                                 setToken(answer.data.token);
                                                 navigate(`/hoje`);
                                         });

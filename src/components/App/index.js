@@ -7,16 +7,17 @@ import SignUp from "../SignUp/index";
 import Today from "../Today/index";
 import Header from "../Header/index";
 import Footer from "../Footer/index";
-import TokenContext from "../../Context/TokenContext";
 import { GlobalStyle } from "./style"
+import UserContext from "../../Context/UserContext";
 
 function App() {
         const [token, setToken] = useState(null);
+        const [user, setUser] = useState(null);
 
         return (
                 <>
                         <GlobalStyle />
-                        <TokenContext.Provider value={{ token, setToken }}>
+                        <UserContext.Provider value={{ token, setToken, user, setUser }}>
                                 <BrowserRouter>
                                         <Header />
                                         <Routes>
@@ -28,7 +29,7 @@ function App() {
                                         </Routes>
                                         <Footer />
                                 </BrowserRouter>
-                        </TokenContext.Provider>
+                        </UserContext.Provider>
                 </>
         );
 }

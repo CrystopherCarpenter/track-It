@@ -1,30 +1,51 @@
-import React from 'react';
+import { useState, useEffect } from "react";
 import Check from "../../assets/Check.png"
 import { Main, Container, Title, Text, HabitName, Habit, CheckBox } from "./style"
+import { useContext } from "react";
+import UserContext from "../../Context/UserContext";
+import dayjs from 'dayjs'
+import locale_br from 'dayjs/locale/pt-br'
+import axios from "axios";
 
 function Today() {
-        const myHabits = [
-                { name: `Ler um livro inteiro em 2 horas`, days: [0, 2, 3, 5] },
-                { name: `Escrever um livro inteiro em 2 horas`, days: [1, 4, 6] },
-                { name: `Correr uma maratona`, days: [0, 3, 6] }
-        ];
+        const today = dayjs();
+        const { token } = useContext(UserContext);
+        const [todayHabits, setTodayHabits] = useState(null);
+
+        useEffect(() => {
+                const promise = axios.get(
+                        `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today`,
+                        { headers: { Authorization: `Bearer ${token}` } }
+                );
+
+                promise.then((answer) => {
+                        setTodayHabits(answer.data);
+                });
+        }, []);
+
+        function setDate(today) {
+                return (`
+                        ${locale_br.weekdays[today.getDay()]}, 
+                        ${today.getDate() < 10 && `0`}${today.getDate()}/${today.getMonth() < 9 && `0`}${(today.getMonth()) + 1}`
+                );
+        }
 
         return (
                 <Main>
                         <Container>
-                                <Title>Segunda, 10/01</Title>
+                                <Title>{setDate(today.$d)}</Title>
                                 <Text>Nenhum hábito concluído ainda</Text>
                         </Container>
-                        {myHabits.length === 0 ? (
+                        {todayHabits.length === 0 ? (
                                 <Text>Você não tem nenhum hábito hoje</Text>
-                        ) : myHabits.map((habit) => (
-                                <Habit key={habit.name}>
+                        ) : todayHabits.map((habit) => (
+                                <Habit key={habit.id} done={habit.done}>
                                         <div>
                                                 <HabitName>{habit.name}</HabitName>
-                                                <p>Sequência atual: <span>3 dias</span></p>
-                                                <p>Seu recorde: <span>3 dias</span></p>
+                                                <p>Sequência atual: <span>{habit.currentSequence} dias</span></p>
+                                                <p>Seu recorde: <span>{habit.highestSequence} dias</span></p>
                                         </div>
-                                        <CheckBox><img src={Check} alt="Concluído" /></CheckBox>
+                                        <CheckBox done={habit.done}><img src={Check} alt="Concluído" /></CheckBox>
                                 </Habit>
                         ))}
                 </Main>
