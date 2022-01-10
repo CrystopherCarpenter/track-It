@@ -23,7 +23,13 @@ const Title = styled.h1`
 const Text = styled.p`
         font-size: 18px;
         line-height: 22px;
-        color: #BABABA; /*#8FC549*/
+        color: #BABABA;
+`
+
+const TextProgress = styled.p`
+        font-size: 18px;
+        line-height: 22px;
+        color: ${props => (!props.progress ? `#BABABA` : `#8FC549`)}
 `
 
 const HabitName = styled.h1`
@@ -86,4 +92,4 @@ const CheckBox = styled.div`
                 }
 `
 
-export { Main, Container, Title, Text, HabitName, Habit, Current, Highest, CheckBox };
+export { Main, Container, Title, Text, HabitName, Habit, Current, Highest, CheckBox, TextProgress };
