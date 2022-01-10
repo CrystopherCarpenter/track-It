@@ -11,7 +11,6 @@ function Today() {
         const today = dayjs();
         const { token } = useContext(UserContext);
         const { progress, setProgress } = useContext(UserContext);
-        let localProgress = 0;
         let progressCounter = 0;
         const [todayHabits, setTodayHabits] = useState([]);
 
@@ -20,7 +19,7 @@ function Today() {
         }, []);
 
         useEffect(() => {
-                setProgress(localProgress)
+                calcProgress()
         }, [todayHabits]);
 
         function loadHabits() {
@@ -35,7 +34,7 @@ function Today() {
         }
 
         function calcProgress() {
-                localProgress = Math.round((progressCounter / todayHabits.length) * 100)
+                setProgress(Math.round((progressCounter / todayHabits.length) * 100));
         }
 
         function setDate(today) {
@@ -58,7 +57,6 @@ function Today() {
                                 <Text>Você não tem nenhum hábito hoje</Text>
                         ) : todayHabits.map((habit) => {
                                 habit.done && (progressCounter++)
-                                calcProgress();
                                 return (
                                         <Habit key={habit.id}>
                                                 <div>

@@ -10,8 +10,8 @@ import axios from "axios";
 function Habits() {
         const days = [{ name: `D`, id: 0 }, { name: `S`, id: 1 }, { name: `T`, id: 2 }, { name: `Q`, id: 3 }, { name: `Q`, id: 4 }, { name: `S`, id: 5 }, { name: `S`, id: 6 }];
         const [add, setAdd] = useState(false);
-        const [selectedDays, setSelectedDays] = useState();
-        const [habits, setHabits] = useState();
+        const [selectedDays, setSelectedDays] = useState([]);
+        const [habits, setHabits] = useState([]);
         const [loading, setLoading] = useState(false);
         const [habitName, setHabitName] = useState(``);
         const { token } = useContext(UserContext);
